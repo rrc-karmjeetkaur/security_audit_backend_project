@@ -1,0 +1,10 @@
+import morgan, { StreamOptions } from 'morgan';
+import fs from 'fs';
+import path from 'path';
+const logsDir = path.join(__dirname,'../../../../logs');
+if(!fs.existsSync(logsDir)) fs.mkdirSync(logsDir,{recursive:true});
+const accessStream = fs.createWriteStream(path.join(logsDir,'access.log'), {flags:'a'});
+const errorStream: StreamOptions = { write: (m: string | Uint8Array<ArrayBufferLike>)=> fs.appendFileSync(path.join(logsDir,'error.log'), m) };
+export const accessLogger = morgan('combined',{stream: accessStream});
+export const errorLogger = morgan('combined',{stream: errorStream, skip: (_req: any,res: { statusCode: number; })=> res.statusCode < 400});
+export const consoleLogger = morgan('dev');
