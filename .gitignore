@@ -1,0 +1,8 @@
+node_modules/
+dist/
+logs/
+.env
+firebase-service-account.json
+.vscode/
+coverage/
+src/config/*.json

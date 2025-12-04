@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "My Assignment4 API Tests",
+    "_postman_id": "my-assignment4-collection",
+    "description": "Postman collection for Firebase authentication and API testing (My Assignment4)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "SignInWithPassword",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"123456\",\n  \"returnSecureToken\": true\n}"
+        },
+        "url": {
+          "raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{firebaseApiKey}}",
+          "protocol": "https",
+          "host": [
+            "identitytoolkit",
+            "googleapis",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "accounts:signInWithPassword"
+          ],
+          "query": [
+            {
+              "key": "key",
+              "value": "{{firebaseApiKey}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Set Admin Claims",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{idToken}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"uid\": \"o9h7yv1N58fEiFRpAuMApiyKo0B2\",\n  \"role\": \"officer\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/admin/claims",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "v1", "admin", "claims"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Loan",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "
